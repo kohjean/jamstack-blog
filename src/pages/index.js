@@ -1,6 +1,8 @@
 import React from "react"
+import { graphql } from "gatsby"
+import Img from "gatsby-image"
 
-export default function Home() {
+export default function Home({ data }) {
   return (
     <>
       <header className="header">
@@ -24,7 +26,7 @@ export default function Home() {
       </header>
       <section className="hero">
         <figure>
-          <img src="/images/hero.jpg" alt="" />
+          <Img fluid={data.file.childImageSharp.fluid} alt="" />
         </figure>
         <div className="catch">
           <h1>
@@ -121,3 +123,20 @@ export default function Home() {
     </>
   )
 }
+
+export const query = graphql`
+  query {
+    file(relativePath: { eq: "hero.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1600) {
+          base64
+          aspectRatio
+          src
+          srcSet
+          srcSetWebp
+          sizes
+        }
+      }
+    }
+  }
+`
