@@ -12,7 +12,10 @@ import { SEO } from "../components/seo"
 export default function Home({ data }) {
   return (
     <Layout>
-      <SEO />
+      <SEO 
+        pagetitle="ESSENTIALSについて"
+        pagedesc="食べ物についての情報を発信しているサイトです"
+      />
       <div className="eyecatch">
         <figure>
           <Img

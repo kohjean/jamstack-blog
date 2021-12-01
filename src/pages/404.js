@@ -6,7 +6,7 @@ import { SEO } from "../components/seo"
 export default () => {
   return (
     <Layout>
-      <SEO />
+      <SEO pagetitle="ページが見つかりません" />
       <h1>お探しのページは見つかりませんでした</h1>
     </Layout>
   )
