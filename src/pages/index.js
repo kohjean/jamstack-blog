@@ -2,13 +2,10 @@ import React from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 
-import { Header } from "../components/header"
-import { Footer } from "../components/footer"
-
+import { Layout } from "../components/layout"
 export default function Home({ data }) {
   return (
-    <>
-      <Header />
+    <Layout>
       <section className="hero">
         <figure>
           <Img
@@ -93,8 +90,7 @@ export default function Home({ data }) {
           />
         </figure>
       </section>
-      <Footer />
-    </>
+    </Layout>
   )
 }
 
