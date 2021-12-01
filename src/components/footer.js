@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery, Link } from "gatsby"
 import Img from "gatsby-image"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -26,7 +26,7 @@ export const Footer = () => {
     <footer className="footer">
       <div className="container">
         <div className="site">
-          <a href="base-index.html">
+          <Link to={`/`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="225.65"
@@ -41,7 +41,7 @@ export const Footer = () => {
             </svg>
 
             <p>おいしい食材と食事を探求するサイト</p>
-          </a>
+          </Link>
         </div>
         <ul className="sns">
           <li>
