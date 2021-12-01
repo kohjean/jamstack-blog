@@ -183,21 +183,21 @@ export const query = graphql`
     }
     fruit: file(relativePath: { eq: "fruit.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1600) {
+        fluid(maxWidth: 320) {
           ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
     grain: file(relativePath: { eq: "grain.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1600) {
+        fluid(maxWidth: 320) {
           ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
     beverage: file(relativePath: { eq: "beverage.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1600) {
+        fluid(maxWidth: 320) {
           ...GatsbyImageSharpFluid_withWebp
         }
       }
