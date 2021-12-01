@@ -10,6 +10,7 @@ module.exports = {
     title: `ESSENTIALS`,
     description: `おいしい食材と食事を探究するサイト`,
     lang: `ja`,
+    siteUrl: `https://reverent-edison-2a3e92.netlify.app`,
   },
   plugins: [
     `gatsby-transformer-sharp`,
