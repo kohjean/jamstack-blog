@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Img from "gatsby-image"
-
+import { GatsbyImage } from "gatsby-plugin-image"
 import { Layout } from "../components/layout"
 
 import { Seo } from "../components/seo"
@@ -12,8 +11,8 @@ export default function Home({ data }) {
       <Seo />
       <section className="hero">
         <figure>
-          <Img
-            fluid={data.hero.childImageSharp.fluid}
+          <GatsbyImage
+            image={data.hero.childImageSharp.gatsbyImageData}
             alt=""
             style={{ height: "100%" }}
           />
@@ -47,7 +46,10 @@ export default function Home({ data }) {
           <div className="details">
             <div className="detail">
               <figure>
-                <Img fixed={data.fruit.childImageSharp.fixed} alt="" />
+                <GatsbyImage
+                  image={data.fruit.childImageSharp.gatsbyImageData}
+                  alt=""
+                />
               </figure>
               <h3>フルーツ</h3>
               <p>FRUIT</p>
@@ -59,7 +61,10 @@ export default function Home({ data }) {
             </div>
             <div className="detail">
               <figure>
-                <Img fixed={data.grain.childImageSharp.fixed} alt="" />
+                <GatsbyImage
+                  image={data.grain.childImageSharp.gatsbyImageData}
+                  alt=""
+                />
               </figure>
               <h3>穀物</h3>
               <p>GRAIN</p>
@@ -71,7 +76,10 @@ export default function Home({ data }) {
             </div>
             <div className="detail">
               <figure>
-                <Img fixed={data.beverage.childImageSharp.fixed} alt="" />
+                <GatsbyImage
+                  image={data.beverage.childImageSharp.gatsbyImageData}
+                  alt=""
+                />
               </figure>
               <h3>飲み物</h3>
               <p>BEVERAGE</p>
@@ -87,8 +95,8 @@ export default function Home({ data }) {
       <section className="photo">
         <h2 className="sr-only">Photo</h2>
         <figure>
-          <Img
-            fluid={data.berry.childImageSharp.fluid}
+          <GatsbyImage
+            image={data.berry.childImageSharp.gatsbyImageData}
             alt=""
             style={{ height: "100%" }}
           />
@@ -102,44 +110,32 @@ export const query = graphql`
   query {
     hero: file(relativePath: { eq: "hero.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1600) {
-          ...GatsbyImageSharpFluid_withWebp
-        }
+        gatsbyImageData(layout: FULL_WIDTH)
       }
     }
     fruit: file(relativePath: { eq: "fruit.jpg" }) {
       childImageSharp {
-        fixed(width: 200) {
-          ...GatsbyImageSharpFixed_withWebp
-        }
+        gatsbyImageData(width: 320, layout: CONSTRAINED)
       }
     }
     grain: file(relativePath: { eq: "grain.jpg" }) {
       childImageSharp {
-        fixed(width: 200) {
-          ...GatsbyImageSharpFixed_withWebp
-        }
+        gatsbyImageData(width: 320, layout: CONSTRAINED)
       }
     }
     beverage: file(relativePath: { eq: "beverage.jpg" }) {
       childImageSharp {
-        fixed(width: 200) {
-          ...GatsbyImageSharpFixed_withWebp
-        }
+        gatsbyImageData(width: 320, layout: CONSTRAINED)
       }
     }
     berry: file(relativePath: { eq: "berry.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1600) {
-          ...GatsbyImageSharpFluid_withWebp
-        }
+        gatsbyImageData(layout: FULL_WIDTH)
       }
     }
     pattern: file(relativePath: { eq: "pattern.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1920, quality: 90) {
-          ...GatsbyImageSharpFluid_withWebp
-        }
+        gatsbyImageData(quality: 90, layout: FULL_WIDTH)
       }
     }
   }
