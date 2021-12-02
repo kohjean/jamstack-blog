@@ -9,7 +9,7 @@ import { faUtensils, faCheckSquare } from "@fortawesome/free-solid-svg-icons"
 
 import { Seo } from "../components/seo"
 
-export default function Home({ data, location }) {
+export default function About({ data, location }) {
   return (
     <Layout>
       <Seo
