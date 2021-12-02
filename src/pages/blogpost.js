@@ -9,13 +9,16 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
 
+import Imgix from "react-imgix"
+
 export default function BlogPost({ data }) {
   return (
     <Layout>
       <div className="eyecatch">
         <figure>
-          <img
-            src="images-baseblog/eyecatch.jpg"
+          <Imgix
+            src={data.microcmsBlog.eyecatch.url}
+            sizes="(max-width: 785px) 100vw, 785px"
             alt="アイキャッチ画像の説明"
           />
         </figure>
@@ -76,6 +79,9 @@ export const query = graphql`
         category
         categorySlug
         id
+      }
+      eyecatch {
+        url
       }
     }
   }
