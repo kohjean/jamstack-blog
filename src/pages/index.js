@@ -4,12 +4,12 @@ import Img from "gatsby-image"
 
 import { Layout } from "../components/layout"
 
-import { SEO } from "../components/seo"
+import { Seo } from "../components/seo"
 
 export default function Home({ data }) {
   return (
     <Layout>
-      <SEO />
+      <Seo />
       <section className="hero">
         <figure>
           <Img

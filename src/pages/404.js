@@ -1,13 +1,12 @@
 import React from "react"
 import { Layout } from "../components/layout"
 
-import { SEO } from "../components/seo"
+import { Seo } from "../components/seo"
 
-export default ({location}) => {
+export default function NotFound({ location }) {
   return (
     <Layout>
-      <SEO pagetitle="ページが見つかりません" 
-      pagepath={location.pathname}/>
+      <Seo pagetitle="ページが見つかりません" pagepath={location.pathname} />
       <h1>お探しのページは見つかりませんでした</h1>
     </Layout>
   )

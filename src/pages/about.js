@@ -7,12 +7,12 @@ import { Layout } from "../components/layout"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUtensils, faCheckSquare } from "@fortawesome/free-solid-svg-icons"
 
-import { SEO } from "../components/seo"
+import { Seo } from "../components/seo"
 
 export default function Home({ data, location }) {
   return (
     <Layout>
-      <SEO
+      <Seo
         pagetitle="ESSENTIALSについて"
         pagedesc="食べ物についての情報を発信しているサイトです"
         pagepath={location.pathname}
