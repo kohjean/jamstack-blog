@@ -1,4 +1,5 @@
 import React from "react"
+import { graphql } from "gatsby"
 import { Layout } from "../components/layout"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -8,7 +9,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
 
-export default function BlogPost() {
+export default function BlogPost({ data }) {
   return (
     <Layout>
       <div className="eyecatch">
@@ -21,26 +22,29 @@ export default function BlogPost() {
       </div>
       <article className="content">
         <div className="container">
-          <h1 className="bar">記事のタイトル</h1>
+          <h1 className="bar">{data.microcmsBlog.title}</h1>
           <aside className="info">
             <time dateTime="XXXX-XX-XX">
               <FontAwesomeIcon icon={faClock} />
-              XXXX年XX月XX日
+              {data.microcmsBlog.publishDate}
             </time>
             <div className="cat">
               <FontAwesomeIcon icon={faFolderOpen} />
               <ul>
-                <li className="スラッグ">カテゴリーＡ</li>
-                <li className="スラッグ">カテゴリーＢ</li>
+                {data.microcmsBlog.category.map(cat => (
+                  <li className={cat.categorySlug} key={cat.id}>
+                    {cat.category}
+                  </li>
+                ))}
               </ul>
             </div>
           </aside>
           <div className="postbody">
-            <p>
-              記事の本文です。記事の本文です。記事の本文です。記事の本文です。記事の本文です。
-              記事の本文です。記事の本文です。記事の本文です。記事の本文です。記事の本文です。
-              記事の本文です。記事の本文です。記事の本文です。記事の本文です。記事の本文です。
-            </p>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: `${data.microcmsBlog.content}`,
+              }}
+            />
           </div>
           <ul className="postlink">
             <li className="prev">
@@ -61,3 +65,18 @@ export default function BlogPost() {
     </Layout>
   )
 }
+
+export const query = graphql`
+  query {
+    microcmsBlog {
+      title
+      publishDate(formatString: "YYYY/MM/DD/")
+      content
+      category {
+        category
+        categorySlug
+        id
+      }
+    }
+  }
+`
