@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Layout } from "../../components/layout"
+import { Layout } from "../components/layout"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClock, faFolderOpen } from "@fortawesome/free-regular-svg-icons"
@@ -70,8 +70,8 @@ export default function BlogPost({ data }) {
 }
 
 export const query = graphql`
-  query {
-    microcmsBlog {
+  query ($id: String!) {
+    microcmsBlog(id: { eq: $id }) {
       title
       publishDate(formatString: "YYYY/MM/DD/")
       content
