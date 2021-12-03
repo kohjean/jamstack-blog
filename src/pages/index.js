@@ -1,7 +1,9 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { Layout } from "../components/layout"
+
+import Imgix from "react-imgix"
 
 import { Seo } from "../components/seo"
 
@@ -102,6 +104,29 @@ export default function Home({ data }) {
           />
         </figure>
       </section>
+      <section>
+        <div className="container">
+          <h2 className="sr-only">RECENT POSTS</h2>
+          <div className="posts">
+            {data.allMicrocmsBlog.edges.map(({ node }) => (
+              <article className="post" key={node.id}>
+                <Link to={`/blog/post/${node.slug}`}>
+                  <figure>
+                    <Imgix
+                      src={node.eyecatch.url}
+                      sizes="(max-width: 573px) 100vw 573px"
+                      htmlAttributes={{
+                        alt: "",
+                      }}
+                    />
+                  </figure>
+                  <h3>{node.title}</h3>
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
     </Layout>
   )
 }
@@ -136,6 +161,22 @@ export const query = graphql`
     pattern: file(relativePath: { eq: "pattern.jpg" }) {
       childImageSharp {
         gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      }
+    }
+    allMicrocmsBlog(
+      sort: { order: DESC, fields: publishDate }
+      skip: 0
+      limit: 4
+    ) {
+      edges {
+        node {
+          title
+          id
+          slug
+          eyecatch {
+            url
+          }
+        }
       }
     }
   }
