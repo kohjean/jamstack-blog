@@ -26,6 +26,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             title
           }
         }
+        group(field: category___categorySlug) {
+          fieldValue
+          totalCount
+        }
       }
       allMicrocmsCategory {
         nodes {
@@ -72,19 +76,33 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     })
   })
 
-  blogresult.data.allMicrocmsCategory.nodes.forEach(node => {
-    createPage({
-      path: `/cat/${node.categorySlug}/`,
-      component: path.resolve(`./src/templates/cat-template.js`),
-      context: {
-        catid: node.categoryId,
-        catname: node.category,
-        skip: 0,
-        limit: 100,
-        currentPage: 1,
-        isFirst: true,
-        isLast: true,
-      },
+  blogresult.data.allMicrocmsBlog.group.forEach(node => {
+    const catPostsPerPage = 6
+    const catPosts = node.totalCount
+    const catPages = Math.ceil(catPosts / catPostsPerPage)
+
+    Array.from({ length: catPages }).forEach((_, i) => {
+      createPage({
+        path:
+          i === 0
+            ? `/cat/${node.fieldValue}/`
+            : `/cat/${node.fieldValue}/${i + 1}`,
+        component: path.resolve(`./src/templates/cat-template.js`),
+        context: {
+          catid: blogresult.data.allMicrocmsCategory.nodes.find(
+            n => n.categorySlug === node.fieldValue
+          ).categoryId,
+          catname: blogresult.data.allMicrocmsCategory.nodes.find(
+            n => n.categorySlug === node.fieldValue
+          ).category,
+          catslug: node.fieldValue,
+          skip: catPostsPerPage * i,
+          limit: catPostsPerPage,
+          currentPage: i + 1,
+          isFirst: i + 1 === 1,
+          isLast: i + 1 === catPages,
+        },
+      })
     })
   })
 }

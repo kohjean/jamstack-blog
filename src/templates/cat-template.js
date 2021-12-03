@@ -12,7 +12,7 @@ import Imgix from "react-imgix"
 
 import { Seo } from "../components/seo"
 
-export default function Blog({ data, location, pageContext }) {
+export default function Category({ data, location, pageContext }) {
   return (
     <Layout>
       <Seo
@@ -47,8 +47,10 @@ export default function Blog({ data, location, pageContext }) {
                 <Link
                   to={
                     pageContext.currentPage === 2
-                      ? `/blog/`
-                      : `/blog/${pageContext.currentPage - 1}`
+                      ? `/cat/${pageContext.catslug}/`
+                      : `/cat/${pageContext.catslug}/${
+                          pageContext.currentPage - 1
+                        }/`
                   }
                   rel="prev"
                 >
@@ -59,7 +61,12 @@ export default function Blog({ data, location, pageContext }) {
             )}
             {!pageContext.isLast && (
               <li className="next">
-                <Link to={`/blog/${pageContext.currentPage + 1}`} rel="next">
+                <Link
+                  to={`/cat/${pageContext.catslug}/${
+                    pageContext.currentPage + 1
+                  }/`}
+                  rel="next"
+                >
                   <span>次のページ</span>
                   <FontAwesomeIcon icon={faChevronRight} />
                 </Link>
