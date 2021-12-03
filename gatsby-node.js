@@ -17,6 +17,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             }
             slug
           }
+          next {
+            slug
+            title
+          }
+          previous {
+            slug
+            title
+          }
         }
       }
     }
@@ -27,13 +35,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  blogresult.data.allMicrocmsBlog.edges.forEach(element => {
-    console.log(element)
+  blogresult.data.allMicrocmsBlog.edges.forEach(({node, next, previous}) => {
     createPage({
-      path: `/blog/post/${element.node.slug}`,
+      path: `/blog/post/${node.slug}`,
       component: path.resolve(`./src/templates/blogpost-template.js`),
       context: {
-        id: element.node.id,
+        id: node.id,
+        next,
+        previous,
       },
     })
   })
