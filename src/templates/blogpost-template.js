@@ -11,9 +11,17 @@ import {
 
 import Imgix from "react-imgix"
 
-export default function BlogPost({ data, pageContext }) {
+import { Seo } from "../components/seo"
+import { convert } from "html-to-text"
+
+export default function BlogPost({ data, pageContext, location }) {
   return (
     <Layout>
+      <Seo
+        pagetitle={data.microcmsBlog.title}
+        pagedesc={`${convert(data.microcmsBlog.content).slice(0, 70)}…`}
+        pagepath={location.pathname}
+      />
       <div className="eyecatch">
         <figure>
           <Imgix
