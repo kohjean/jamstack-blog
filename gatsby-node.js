@@ -35,7 +35,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  blogresult.data.allMicrocmsBlog.edges.forEach(({node, next, previous}) => {
+  blogresult.data.allMicrocmsBlog.edges.forEach(({ node, next, previous }) => {
     createPage({
       path: `/blog/post/${node.slug}`,
       component: path.resolve(`./src/templates/blogpost-template.js`),
@@ -44,6 +44,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         next,
         previous,
       },
+    })
+  })
+
+  const blogPostsPerPage = 6
+  const blogPosts = blogresult.data.allMicrocmsBlog.edges.length
+  const blogPages = Math.ceil(blogPosts / blogPostsPerPage)
+
+  Array.from({ length: blogPages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/blog/` : `/blog/${i + 1}`,
+      component: path.resolve(`./src/templates/blog-template.js`),
     })
   })
 }
